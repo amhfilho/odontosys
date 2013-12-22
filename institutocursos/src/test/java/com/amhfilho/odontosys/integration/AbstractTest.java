@@ -1,21 +1,17 @@
 package com.amhfilho.odontosys.integration;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import junit.framework.Assert;
 
-import org.apache.derby.jdbc.EmbeddedDataSource;
-import org.apache.naming.java.javaURLContextFactory;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.amhfilho.odontosys.model.Pessoa;
 
 public class AbstractTest {
+	/*
 	@BeforeClass
 	public static void setUpClass() throws Exception {
 		System.setProperty(Context.INITIAL_CONTEXT_FACTORY,
@@ -43,7 +39,14 @@ public class AbstractTest {
 
 		ic.unbind("java:comp/env/jdbc/odontosysDS");
 	}
-
+*/
+	static EntityManagerFactory emf;
+	
+	//@BeforeClass
+	public static void setupClass() {
+		emf = Persistence.createEntityManagerFactory("odontosysPU");
+	}
+	
 	@Test
 	public void testeNovaPessoa() {
 
@@ -72,6 +75,11 @@ public class AbstractTest {
 		Assert.assertEquals(pessoa.getNome(), pessoaEncontrada.getNome());
 
 		entityManager.close();
+	}
+	
+	@Test
+	public void testeNovoInstrutor(){
+		
 	}
 
 }
